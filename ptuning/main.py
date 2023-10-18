@@ -125,6 +125,7 @@ def main():
     if model_args.quantization_bit is not None:
         print(f"Quantized to {model_args.quantization_bit} bit")
         model = model.quantize(model_args.quantization_bit)
+    #前缀微调
     if model_args.pre_seq_len is not None:
         # P-tuning v2
         model = model.half()
@@ -326,7 +327,7 @@ def main():
     training_args.generation_num_beams = (
         data_args.num_beams if data_args.num_beams is not None else training_args.generation_num_beams
     )
-    # Initialize our Trainer
+    # Initialize our Trainer 训练
     trainer = Seq2SeqTrainer(
         model=model,
         args=training_args,
@@ -338,7 +339,7 @@ def main():
         save_changed=model_args.pre_seq_len is not None
     )
 
-    # Training
+    # Training 训练
     if training_args.do_train:
         checkpoint = None
         if training_args.resume_from_checkpoint is not None:
