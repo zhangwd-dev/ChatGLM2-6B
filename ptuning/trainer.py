@@ -28,7 +28,7 @@ logger = logging.get_logger(__name__)
 WEIGHTS_NAME = "pytorch_model.bin"
 TRAINING_ARGS_NAME = "training_args.bin"
 
-
+# 实际调用类
 class PrefixTrainer(Trainer):
     def __init__(self, *args, save_changed=False, **kwargs):
         self.save_changed = save_changed
